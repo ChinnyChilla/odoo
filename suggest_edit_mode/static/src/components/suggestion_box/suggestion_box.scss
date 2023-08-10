@@ -1,0 +1,21 @@
+// ------------------------------------------------------------------
+// Layout
+// ------------------------------------------------------------------
+
+.o_SuggestionBox_suggestionList {
+    max-width: var(--Chatter-max-width, none);
+	max-height: var(--Chatter-max-height, none);
+}
+
+// ------------------------------------------------------------------
+// Style
+// ------------------------------------------------------------------
+
+.o_SuggestionBox_title {
+    margin-top: var(--SuggestionBox_title-margin, #{map-get($spacers, 4)});
+}
+
+.o_SuggestionBox_titleLine {
+    border-top: $border-width dashed $border-color;
+}
+

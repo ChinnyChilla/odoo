@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="suggest.Suggestion" owl="1">
+        <div class="o_Activity d-flex py-2 px-3" t-attf-class="{{ className }}" t-ref="root">
+            <!-- This is for profile picture if want it, copied from Activity -->
+            <div class="o_Activity_sidebar me-3">
+                <div class="o_Activity_user position-relative h-100 w-100">
+                    <t t-if="suggestionView.suggestion.suggestor">
+                        <img class="o_Activity_userAvatar rounded-circle h-100 w-100 o_object_fit_cover" t-attf-src="/web/image/res.users/{{ suggestionView.suggestion.suggestor.id }}/avatar_128" t-att-alt="suggestionView.suggestion.suggestor.nameOrDisplayName"/>
+                    </t>
+                </div>
+            </div>
+            <div class="o_Activity_core">
+                <div>
+                    <div>
+                        <b class="d-flex align-items-baseline me-2 text-900 text-success">
+                            Suggestion:
+                            <span class="o_Suggestion_tab"/>
+                            <small class="text-muted">
+                                <t t-esc="suggestionView.dateFromNow" />
+                            </small>
+                        </b>
+                    </div>
+                    <t t-foreach="suggestionView.suggestion.edits" t-as="edit" t-key="edit.id">
+                            <div> <t t-out="edit.command"/> <b>
+                                    <t class="text-warning"
+                                        t-esc="edit.string" />
+                                </b>
+                                to <b>
+                                    <t t-esc="edit.value" />
+                                </b>
+                                <t t-if="edit.additional_value">
+                                    <ul>
+                                        <t t-foreach="edit.additional_value"
+                                            t-as="additonal_value" t-key="additonal_value.id">
+                                            <li>
+                                                <span style="display:inline-block; width: 7px;"></span>
+                                                <t  t-esc="additonal_value.string" />
+                                                <i  class="o_TrackingValue_separator fa fa-long-arrow-right mx-1 text-600"
+                                                    title="Changed" role="img" aria-label="Changed"></i>
+                                                <t t-esc="additonal_value.value" />
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </t>
+                            </div>
+                    </t>
+                </div>
+                <t t-if="suggestionView.suggestion.canWrite">
+                    <div class="o_Suggestion_buttons align-items-baseline">
+                        <div name="tools" class="o_Activity_tools d-flex">
+                            <button
+                                class="o_Activity_toolButton o_Activity_markDoneButton btn btn-link btn-primary pt-0 ps-0"
+                                t-on-click="suggestionView.onClickAccept">
+                                <i class="fa fa-check" /> Accept </button>
+
+                            <button
+                                class="o_Activity_toolButton o_Activity_cancelButton btn btn-link btn-primary pt-0"
+                                t-on-click="suggestionView.onClickReject">
+                                <i class="fa fa-times" /> Reject </button>
+                        </div>
+                    </div>
+                </t>
+                <t t-if="suggestionView.suggestion.sameAsCreator">
+                    <div class="o_Suggestion_buttons align-items-baseline">
+                        <div name="tools" class="o_Activity_tools d-flex">
+                            <button
+                                class="o_Activity_toolButton o_Activity_cancelButton btn btn-link btn-primary pt-0"
+                                t-on-click="suggestionView.onClickReject">
+                                <i class="fa fa-times" /> Cancel </button>
+                        </div>
+                    </div>
+                </t>		
+            </div>
+        </div>
+    </t>
+</templates>

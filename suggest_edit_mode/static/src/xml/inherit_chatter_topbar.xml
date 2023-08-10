@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+        <xpath expr="//button[contains(@class, 'o_ChatterTopbar_buttonLogNote')]" position="after">
+                <button
+                    class="btn btn-light text-nowrap"
+                    type="button"
+                    t-on-click="chatterTopbar.chatter.showSuggestionPage">
+                    <field model="res.users"></field>
+                    <span>Suggest Mode Toggle</span>
+                </button>
+        </xpath>
+    </t>
+</templates>

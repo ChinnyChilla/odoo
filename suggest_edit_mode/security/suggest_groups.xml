@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_suggestion_user" model="res.groups">
+        <field name="name">Suggest Mode/User</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]" />
+    </record>
+    <record id="group_suggestion_admin" model="res.groups">
+        <field name="name">Suggest Mode/Admin</field>
+        <field name="implied_ids" eval="[Command.link(ref('group_suggestion_user'))]" />
+    </record>
+</odoo>
+

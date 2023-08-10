@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//t[contains(@t-if, 'chatter.activityBoxView')]" position="before">
+            <t t-if='chatter.suggestionBoxView'>
+                <SuggestionBox className="o_Chatter_suggestionBox" record="chatter.suggestionBoxView"/>
+            </t>
+        </xpath>
+    </t>
+</templates>
+

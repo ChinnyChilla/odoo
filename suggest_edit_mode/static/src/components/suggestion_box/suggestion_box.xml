@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="suggest.SuggestionBox" owl="1">
+        <t t-if="suggestionBoxView">
+            <div class="o_SuggestionBox" t-attf-class="{{ className }}" t-ref="root">
+                <a href="#" role="button"
+                    class="o_ActivityBox_title btn d-flex align-items-center p-0 w-100 fw-bold"
+                    t-att-aria-expanded="suggestionBoxView.isSuggestionViewActive ? 'true' : 'false'"
+                    t-on-click="suggestionBoxView.onClickSuggestionBoxTitle">
+                    <hr class="o_ActivityBox_titleLine w-auto flex-grow-1 me-3" />
+                    <div class="o_ActivityBox_titleText">
+                        <i class="fa fa-fw"
+                            t-att-class="suggestionBoxView.isSuggestionViewActive ? 'fa-caret-down' : 'fa-caret-right'" />
+                        Suggestions </div>
+                    <t t-if="!suggestionBoxView.isSuggestionViewActive">
+                        <span class="o_ActivityBox_titleBadges ms-2">
+                            <t t-if="suggestionBoxView.chatter.thread.suggestions.length > 0">
+                                <span class="o_ActivityBox_titleBadge me-1 badge text-bg-warning">
+                                    <t t-esc="suggestionBoxView.chatter.thread.suggestions.length" />
+                                </span>
+                            </t>
+                        </span>
+                    </t>
+                    <hr class="o_ActivityBox_titleLine w-auto flex-grow-1 me-3" />
+                </a>
+                <t t-if="suggestionBoxView.isSuggestionViewActive">
+                    <div class="o_ActivityBox_activityList">
+                        <t t-foreach="suggestionBoxView.suggestionViews" t-as="suggestionView"
+                            t-key="suggestionView.localId">
+                            <Suggestion className="'o_ActivityBox_activity'" record="suggestionView" />
+                        </t>
+                    </div>
+                </t>
+            </div>	
+        </t>
+    </t>
+</templates>
