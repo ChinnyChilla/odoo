@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mrp_production_form_inherit_mrp_production">
+            <field name="name">mrp.production.form.inherit.mrp.production</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+
+                <!-- Notebook Page -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Printing" name="printing">
+                        <group>
+                            <group>
+                                <field name="stl_file_name" invisible="1" />
+                                <field name="stl_file" filename="stl_file_name" />
+                            </group>
+                            <group>
+                                <field name="slicer_id" />
+                                <field name="printer_id" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <!-- Smart Button -->
+                <xpath expr="//sheet//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" name="action_view_prints" type="object"
+                        icon="fa-print" attrs="{'invisible': [('print_count', '=', 0)]}">
+                        <field string="Prints" name="print_count" widget="statinfo" />
+                    </button>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

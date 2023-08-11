@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- Form View -->
+	<record id="octoprint_printer_view_form" model="ir.ui.view">
+		<field name="name">octoprint.printer.view.form</field>
+		<field name="model">octoprint.printer</field>
+		<field name="arch" type="xml">
+			<form string="Printer View">
+				<sheet>
+					<h1>
+						<field name="name" placeholder="Name" />
+					</h1>
+					<group>
+						<group string="Printer Information">
+							<field name="profile_id" />
+							<field name="color" />
+							<field name="model" />
+							<field name="default" />
+							<field name="current" />
+							<field name="heated_bed" />
+							<field name="heated_chamber" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Volume">
+							<group>
+								<group string="Printer Volume">
+									<field name="form_factor" />
+									<field name="origin" />
+									<field name="width" />
+									<field name="height" />
+									<field name="depth" />
+									<field name="custom_box" />
+								</group>
+								<group string="Custom Box Dimensions"
+									attrs="{'invisible': [('custom_box', '=', False)]}">
+									<field name="min_x" />
+									<field name="max_x" />
+									<field name="min_y" />
+									<field name="max_y" />
+									<field name="min_z" />
+									<field name="max_z" />
+								</group>
+							</group>
+						</page>
+						<page string="Axes">
+							<group>
+								<group string="Axis Speed">
+									<field name="x_speed" />
+									<field name="y_speed" />
+									<field name="z_speed" />
+									<field name="e_speed" />
+								</group>
+								<group string="Axis Inversion">
+									<field name="x_inverted" />
+									<field name="y_inverted" />
+									<field name="z_inverted" />
+									<field name="e_inverted" />
+								</group>
+							</group>
+						</page>
+						<page string="Extruders">
+							<group>
+								<group string="Extruder Information">
+									<field name="extruder_count" />
+									<field name="shared_nozzle" />
+									<field name="nozzle_diameter" />
+									<field name="nozzle_length" />
+								</group>
+								<separator string="Extruders" />
+								<field name="extruder_ids" />
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- List View -->
+	<record id="octoprint_printer_view_list" model="ir.ui.view">
+		<field name="name">octoprint.printer.view.list</field>
+		<field name="model">octoprint.printer</field>
+		<field name="arch" type="xml">
+			<tree string="Printer List">
+				<field name="name" />
+				<field name="profile_id" />
+				<field name="model" />
+			</tree>
+		</field>
+	</record>
+
+	<!-- Search View -->
+	<record id="octoprint_printer_view_search" model="ir.ui.view">
+		<field name="name">octoprint.printer.view.search</field>
+		<field name="model">octoprint.printer</field>
+		<field name="arch" type="xml">
+			<search string="Printer Search">
+				<field name="name" />
+				<field name="profile_id" />
+				<field name="model" />
+			</search>
+		</field>
+	</record>
+
+</odoo>

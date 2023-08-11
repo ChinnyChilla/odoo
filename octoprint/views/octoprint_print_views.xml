@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- Form View -->
+	<record id="octoprint_print_view_form" model="ir.ui.view">
+		<field name="name">octoprint.print.view.form</field>
+		<field name="model">octoprint.print</field>
+		<field name="arch" type="xml">
+			<form string="Print View">
+				<header>
+					<button name="action_cancel" type="object" string="Cancel"
+						attrs="{'invisible': ['|', ('state', 'in', ['error', 'cancel']), ('name', '=', 'New')]}" />
+					<field name="state" widget="statusbar" statusbar_visible="open,print,done" />
+				</header>
+				<sheet>
+					<h1>
+						<field name="is_current_job" invisible="1" />
+						<field name="name" />
+					</h1>
+					<group>
+						<group string="Print Information">
+							<field name="stl_file_name" invisible="1" />
+							<field name="stl_file" filename="stl_file_name" />
+							<field name="slicer_id" />
+							<field name="printer_id" />
+						</group>
+						<group string="Other Information">
+							<field name="mrp_id" />
+						</group>
+						<group string="Print Status">
+							<field name="completion" widget="percentage" />
+							<field name="current_print_time" />
+							<field name="remaining_print_time" />
+						</group>
+						<separator string="Print Statistics" />
+						<field name="statistic_ids" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- List View -->
+	<record id="octoprint_print_view_list" model="ir.ui.view">
+		<field name="name">octoprint.print.view.list</field>
+		<field name="model">octoprint.print</field>
+		<field name="arch" type="xml">
+			<tree string="Print List">
+				<field name="is_current_job" invisible="1" />
+				<field name="name" />
+				<field name="stl_file_name" invisible="1" />
+				<field name="stl_file" filename="stl_file_name" widget="binary" />
+				<field name="slicer_id" />
+				<field name="printer_id" />
+				<field name="completion" widget="percentage" />
+				<field name="state" />
+			</tree>
+		</field>
+	</record>
+
+	<!-- Search View -->
+	<record id="octoprint_print_view_search" model="ir.ui.view">
+		<field name="name">octoprint.print.view.search</field>
+		<field name="model">octoprint.print</field>
+		<field name="arch" type="xml">
+			<search string="Print Search">
+				<field name="name" />
+				<field name="stl_file_name" />
+				<field name="slicer_id" />
+				<field name="printer_id" />
+				<field name="mrp_id" />
+				<field name="state" />
+			</search>
+		</field>
+	</record>
+
+	<!-- Print Action -->
+	<record id="action_octoprint_print" model="ir.actions.server">
+		<field name="name">Print OctoPrint</field>
+		<field name="model_id" ref="model_octoprint_print" />
+		<field name="binding_model_id" ref="model_octoprint_print" />
+		<field name="binding_view_types">list,form</field>
+		<field name="state">code</field>
+		<field name="code">
+			records.action_print()
+		</field>
+	</record>
+
+</odoo>
